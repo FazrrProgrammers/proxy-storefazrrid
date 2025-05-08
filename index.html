@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FastProxyID - Proxy Premium</title>
+  <title>FastProxyID - Login & Registrasi</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     html {
@@ -29,85 +29,88 @@
 <body class="bg-gradient-to-r from-indigo-800 via-purple-700 to-blue-800 text-white font-sans tracking-wide">
 
   <!-- Header -->
-  <header class="text-center py-20 px-4 bg-opacity-60">
+  <header class="text-center py-16 px-4 bg-opacity-60">
     <h1 class="text-5xl font-extrabold fade-in">FastProxyID</h1>
     <p class="text-white/80 text-xl mt-4 fade-in" style="animation-delay: 0.2s;">Solusi Proxy Premium, Cepat & Aman</p>
   </header>
 
-  <!-- Form Order -->
-  <section id="order" class="bg-white text-gray-900 py-16 px-6 rounded-t-3xl shadow-xl max-w-4xl mx-auto mt-10 mb-20 fade-in">
-    <div class="max-w-xl mx-auto">
-      <h2 class="text-4xl font-semibold text-center mb-10">Form Pemesanan</h2>
-      <form id="orderForm" class="space-y-6">
-        <input type="text" id="name" placeholder="Nama Lengkap" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" required />
-        <input type="email" id="email" placeholder="Email Aktif" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" required />
-        
-        <select id="proxy" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" required>
-          <option value="">Pilih Paket Proxy</option>
-          <option value="IPv4 Premium - Rp15.000">IPv4 Premium - Rp15.000</option>
-          <option value="IPv6 Unlimited - Rp10.000">IPv6 Unlimited - Rp10.000</option>
-          <option value="Datacenter Shared - Rp5.000">Datacenter Shared - Rp5.000</option>
-        </select>
-        
-        <textarea id="note" placeholder="Catatan tambahan (opsional)" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"></textarea>
-        
+  <!-- Container -->
+  <div class="flex justify-center items-center min-h-screen py-10 px-6">
+    <div class="max-w-lg w-full bg-white rounded-lg shadow-xl p-8 space-y-6 fade-in">
+
+      <!-- Tab navigation -->
+      <div class="flex justify-between items-center text-lg font-semibold mb-6">
+        <button id="loginBtn" class="text-blue-600 focus:outline-none">Login</button>
+        <button id="registerBtn" class="text-gray-400 focus:outline-none">Registrasi</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="space-y-4 hidden">
+        <h2 class="text-2xl font-semibold text-center mb-6">Login ke Akun</h2>
+        <input type="email" id="loginEmail" placeholder="Email" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" required />
+        <input type="password" id="loginPassword" placeholder="Password" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" required />
         <button type="submit" class="w-full py-4 text-lg text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg hover:brightness-110 focus:outline-none transition ease-in-out duration-300">
-          Kirim Pesanan
+          Login
         </button>
       </form>
+
+      <!-- Register Form -->
+      <form id="registerForm" class="space-y-4 hidden">
+        <h2 class="text-2xl font-semibold text-center mb-6">Registrasi Akun Baru</h2>
+        <input type="text" id="registerName" placeholder="Nama Lengkap" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" required />
+        <input type="email" id="registerEmail" placeholder="Email" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" required />
+        <input type="password" id="registerPassword" placeholder="Password" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" required />
+        <button type="submit" class="w-full py-4 text-lg text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg hover:brightness-110 focus:outline-none transition ease-in-out duration-300">
+          Registrasi
+        </button>
+      </form>
+
     </div>
-  </section>
+  </div>
 
   <script>
-    // Token dan Chat ID Bot Telegram
-    const TELEGRAM_BOT_TOKEN = '7766893816:AAEC--U0cbc4Wm6lKuvFCXyUc92UB4t2ex8';
-    const TELEGRAM_CHAT_ID = '7418555978';
+    const loginBtn = document.getElementById('loginBtn');
+    const registerBtn = document.getElementById('registerBtn');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
 
-    document.getElementById('orderForm').addEventListener('submit', async function(event) {
+    // Show Login Form
+    loginBtn.addEventListener('click', () => {
+      loginForm.classList.remove('hidden');
+      registerForm.classList.add('hidden');
+      loginBtn.classList.add('text-blue-600');
+      loginBtn.classList.remove('text-gray-400');
+      registerBtn.classList.add('text-gray-400');
+      registerBtn.classList.remove('text-blue-600');
+    });
+
+    // Show Register Form
+    registerBtn.addEventListener('click', () => {
+      registerForm.classList.remove('hidden');
+      loginForm.classList.add('hidden');
+      registerBtn.classList.add('text-blue-600');
+      registerBtn.classList.remove('text-gray-400');
+      loginBtn.classList.add('text-gray-400');
+      loginBtn.classList.remove('text-blue-600');
+    });
+
+    // Handle login form submission
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
       event.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      alert(`Login Berhasil! Email: ${email}, Password: ${password}`);
+      // Perform login logic here (e.g., API request, etc.)
+    });
 
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const proxy = document.getElementById('proxy').value;
-      const note = document.getElementById('note').value;
-
-      const message = `
-      *Pesanan Baru Diterima!*
-      
-      📌 *Nama*: ${name}
-      📧 *Email*: ${email}
-      🔑 *Paket Proxy*: ${proxy}
-      📝 *Catatan*: ${note || "Tidak ada catatan tambahan"}
-      
-      Terima kasih telah berbelanja di FastProxyID! Kami akan segera memproses pesanan Anda.
-      `;
-
-      const telegramApiUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-
-      try {
-        // Kirim pesan ke bot Telegram
-        const response = await fetch(telegramApiUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            chat_id: TELEGRAM_CHAT_ID,
-            text: message,
-            parse_mode: 'Markdown'
-          })
-        });
-
-        const result = await response.json();
-        if (result.ok) {
-          alert("Pesanan Anda telah dikirim ke Telegram dengan sukses!");
-          document.getElementById('orderForm').reset(); // Reset form
-        } else {
-          alert("Terjadi kesalahan, coba lagi nanti.");
-        }
-      } catch (error) {
-        alert("Terjadi kesalahan, coba lagi nanti.");
-      }
+    // Handle register form submission
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const name = document.getElementById('registerName').value;
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+      alert(`Registrasi Berhasil! Nama: ${name}, Email: ${email}, Password: ${password}`);
+      // Perform registration logic here (e.g., API request, etc.)
     });
   </script>
 
