@@ -31,12 +31,14 @@
       <form id="orderForm" class="grid gap-4">
         <input type="text" id="name" placeholder="Nama Lengkap" class="p-3 border rounded-lg" required />
         <input type="email" id="email" placeholder="Email Aktif" class="p-3 border rounded-lg" required />
+        
         <select id="proxy" class="p-3 border rounded-lg" required>
           <option value="">Pilih Paket Proxy</option>
-          <option>IPv4 Premium - Rp15.000</option>
-          <option>IPv6 Unlimited - Rp10.000</option>
-          <option>Datacenter Shared - Rp5.000</option>
+          <option value="IPv4 Premium - Rp15.000">IPv4 Premium - Rp15.000</option>
+          <option value="IPv6 Unlimited - Rp10.000">IPv6 Unlimited - Rp10.000</option>
+          <option value="Datacenter Shared - Rp5.000">Datacenter Shared - Rp5.000</option>
         </select>
+        
         <textarea id="note" placeholder="Catatan tambahan (opsional)" class="p-3 border rounded-lg"></textarea>
         <button type="submit" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:brightness-110 text-white py-3 rounded-lg font-semibold">
           Kirim Pesanan
@@ -59,11 +61,15 @@
       const note = document.getElementById('note').value;
 
       const message = `
-      *Pemesanan Baru*
-      Nama: ${name}
-      Email: ${email}
-      Paket Proxy: ${proxy}
-      Catatan: ${note || "Tidak ada catatan"}
+      *Pesanan Baru Diterima!*
+      
+      📌 *Nama*: ${name}
+      📧 *Email*: ${email}
+      🔑 *Paket Proxy*: ${proxy}
+      📝 *Catatan*: ${note || "Tidak ada catatan tambahan"}
+      
+      Terima kasih telah berbelanja di FastProxyID!
+      Kami akan segera memproses pesanan Anda.
       `;
 
       const telegramApiUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
@@ -84,7 +90,7 @@
 
         const result = await response.json();
         if (result.ok) {
-          alert("Pesanan Anda telah dikirim ke Telegram!");
+          alert("Pesanan Anda telah dikirim ke Admin dengan sukses!");
           document.getElementById('orderForm').reset(); // Reset form
         } else {
           alert("Terjadi kesalahan, coba lagi nanti.");
