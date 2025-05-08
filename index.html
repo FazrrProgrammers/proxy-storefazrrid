@@ -6,41 +6,52 @@
   <title>FastProxyID - Proxy Premium</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    html { scroll-behavior: smooth; }
-    @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
+    html {
+      scroll-behavior: smooth;
     }
-    .fade-up {
-      animation: fadeUp 0.8s ease forwards;
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease-out forwards;
     }
   </style>
 </head>
-<body class="bg-[#0a0f1a] text-white font-sans tracking-wide">
+<body class="bg-gradient-to-r from-indigo-800 via-purple-700 to-blue-800 text-white font-sans tracking-wide">
 
   <!-- Header -->
-  <header class="text-center py-16 px-4 bg-gradient-to-r from-indigo-700 via-purple-800 to-blue-700">
-    <h1 class="text-5xl font-extrabold fade-up">FastProxyID</h1>
-    <p class="text-white/80 text-lg mt-4 fade-up" style="animation-delay: 0.2s;">Solusi Proxy Premium, Cepat & Aman</p>
+  <header class="text-center py-20 px-4 bg-opacity-60">
+    <h1 class="text-5xl font-extrabold fade-in">FastProxyID</h1>
+    <p class="text-white/80 text-xl mt-4 fade-in" style="animation-delay: 0.2s;">Solusi Proxy Premium, Cepat & Aman</p>
   </header>
 
   <!-- Form Order -->
-  <section id="order" class="bg-white text-gray-900 py-20 px-6 rounded-t-3xl">
+  <section id="order" class="bg-white text-gray-900 py-16 px-6 rounded-t-3xl shadow-xl max-w-4xl mx-auto mt-10 mb-20 fade-in">
     <div class="max-w-xl mx-auto">
-      <h2 class="text-3xl font-bold text-center mb-8">Form Pemesanan</h2>
-      <form id="orderForm" class="grid gap-4">
-        <input type="text" id="name" placeholder="Nama Lengkap" class="p-3 border rounded-lg" required />
-        <input type="email" id="email" placeholder="Email Aktif" class="p-3 border rounded-lg" required />
+      <h2 class="text-4xl font-semibold text-center mb-10">Form Pemesanan</h2>
+      <form id="orderForm" class="space-y-6">
+        <input type="text" id="name" placeholder="Nama Lengkap" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" required />
+        <input type="email" id="email" placeholder="Email Aktif" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" required />
         
-        <select id="proxy" class="p-3 border rounded-lg" required>
+        <select id="proxy" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" required>
           <option value="">Pilih Paket Proxy</option>
           <option value="IPv4 Premium - Rp15.000">IPv4 Premium - Rp15.000</option>
           <option value="IPv6 Unlimited - Rp10.000">IPv6 Unlimited - Rp10.000</option>
           <option value="Datacenter Shared - Rp5.000">Datacenter Shared - Rp5.000</option>
         </select>
         
-        <textarea id="note" placeholder="Catatan tambahan (opsional)" class="p-3 border rounded-lg"></textarea>
-        <button type="submit" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:brightness-110 text-white py-3 rounded-lg font-semibold">
+        <textarea id="note" placeholder="Catatan tambahan (opsional)" class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"></textarea>
+        
+        <button type="submit" class="w-full py-4 text-lg text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg hover:brightness-110 focus:outline-none transition ease-in-out duration-300">
           Kirim Pesanan
         </button>
       </form>
@@ -68,8 +79,7 @@
       🔑 *Paket Proxy*: ${proxy}
       📝 *Catatan*: ${note || "Tidak ada catatan tambahan"}
       
-      Terima kasih telah berbelanja di FastProxyID!
-      Kami akan segera memproses pesanan Anda.
+      Terima kasih telah berbelanja di FastProxyID! Kami akan segera memproses pesanan Anda.
       `;
 
       const telegramApiUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
@@ -90,7 +100,7 @@
 
         const result = await response.json();
         if (result.ok) {
-          alert("Pesanan Anda telah dikirim ke Admin dengan sukses!");
+          alert("Pesanan Anda telah dikirim ke Telegram dengan sukses!");
           document.getElementById('orderForm').reset(); // Reset form
         } else {
           alert("Terjadi kesalahan, coba lagi nanti.");
