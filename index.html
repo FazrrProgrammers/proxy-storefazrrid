@@ -24,44 +24,20 @@
     <p class="text-white/80 text-lg mt-4 fade-up" style="animation-delay: 0.2s;">Solusi Proxy Premium, Cepat & Aman</p>
   </header>
 
-  <!-- Produk -->
-  <section class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 py-16">
-    <div class="bg-gradient-to-br from-[#1f2937] to-[#111827] p-6 rounded-2xl shadow-2xl hover:scale-105 transition duration-300 fade-up">
-      <h2 class="text-2xl font-bold mb-2 text-purple-400">Proxy IPv4 Premium</h2>
-      <p class="text-gray-300">Lokasi: Indonesia, USA</p>
-      <p class="text-green-400 font-bold text-lg mt-3">Rp 15.000 / bulan</p>
-      <a href="#order" class="block mt-6 bg-purple-600 hover:bg-purple-700 text-white text-center py-2 rounded-xl font-semibold">Order Sekarang</a>
-    </div>
-
-    <div class="bg-gradient-to-br from-[#1f2937] to-[#111827] p-6 rounded-2xl shadow-2xl hover:scale-105 transition duration-300 fade-up" style="animation-delay: 0.1s;">
-      <h2 class="text-2xl font-bold mb-2 text-indigo-400">Proxy IPv6 Unlimited</h2>
-      <p class="text-gray-300">Lokasi: US, EU, CA</p>
-      <p class="text-green-400 font-bold text-lg mt-3">Rp 10.000 / bulan</p>
-      <a href="#order" class="block mt-6 bg-indigo-600 hover:bg-indigo-700 text-white text-center py-2 rounded-xl font-semibold">Order Sekarang</a>
-    </div>
-
-    <div class="bg-gradient-to-br from-[#1f2937] to-[#111827] p-6 rounded-2xl shadow-2xl hover:scale-105 transition duration-300 fade-up" style="animation-delay: 0.2s;">
-      <h2 class="text-2xl font-bold mb-2 text-blue-400">Proxy Datacenter Shared</h2>
-      <p class="text-gray-300">Support semua tools</p>
-      <p class="text-green-400 font-bold text-lg mt-3">Rp 5.000 / bulan</p>
-      <a href="#order" class="block mt-6 bg-blue-600 hover:bg-blue-700 text-white text-center py-2 rounded-xl font-semibold">Order Sekarang</a>
-    </div>
-  </section>
-
   <!-- Form Order -->
   <section id="order" class="bg-white text-gray-900 py-20 px-6 rounded-t-3xl">
     <div class="max-w-xl mx-auto">
       <h2 class="text-3xl font-bold text-center mb-8">Form Pemesanan</h2>
-      <form class="grid gap-4">
-        <input type="text" placeholder="Nama Lengkap" class="p-3 border rounded-lg" required />
-        <input type="email" placeholder="Email Aktif" class="p-3 border rounded-lg" required />
-        <select class="p-3 border rounded-lg" required>
+      <form id="orderForm" class="grid gap-4">
+        <input type="text" id="name" placeholder="Nama Lengkap" class="p-3 border rounded-lg" required />
+        <input type="email" id="email" placeholder="Email Aktif" class="p-3 border rounded-lg" required />
+        <select id="proxy" class="p-3 border rounded-lg" required>
           <option value="">Pilih Paket Proxy</option>
           <option>IPv4 Premium - Rp15.000</option>
           <option>IPv6 Unlimited - Rp10.000</option>
           <option>Datacenter Shared - Rp5.000</option>
         </select>
-        <textarea placeholder="Catatan tambahan (opsional)" class="p-3 border rounded-lg"></textarea>
+        <textarea id="note" placeholder="Catatan tambahan (opsional)" class="p-3 border rounded-lg"></textarea>
         <button type="submit" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:brightness-110 text-white py-3 rounded-lg font-semibold">
           Kirim Pesanan
         </button>
@@ -69,10 +45,55 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="text-center text-sm text-gray-400 py-8">
-    &copy; 2025 FastProxyID. Hak Cipta Dilindungi.
-  </footer>
+  <script>
+    // Token dan Chat ID Bot Telegram
+    const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN';
+    const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID';
+
+    document.getElementById('orderForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const proxy = document.getElementById('proxy').value;
+      const note = document.getElementById('note').value;
+
+      const message = `
+      *Pemesanan Baru*
+      Nama: ${name}
+      Email: ${email}
+      Paket Proxy: ${proxy}
+      Catatan: ${note || "Tidak ada catatan"}
+      `;
+
+      const telegramApiUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+      try {
+        // Kirim pesan ke bot Telegram
+        const response = await fetch(telegramApiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: message,
+            parse_mode: 'Markdown'
+          })
+        });
+
+        const result = await response.json();
+        if (result.ok) {
+          alert("Pesanan Anda telah dikirim ke Telegram!");
+          document.getElementById('orderForm').reset(); // Reset form
+        } else {
+          alert("Terjadi kesalahan, coba lagi nanti.");
+        }
+      } catch (error) {
+        alert("Terjadi kesalahan, coba lagi nanti.");
+      }
+    });
+  </script>
 
 </body>
 </html>
