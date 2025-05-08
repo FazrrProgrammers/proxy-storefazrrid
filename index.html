@@ -99,8 +99,16 @@
       event.preventDefault();
       const email = document.getElementById('loginEmail').value;
       const password = document.getElementById('loginPassword').value;
-      alert(`Login Berhasil! Email: ${email}, Password: ${password}`);
-      // Perform login logic here (e.g., API request, etc.)
+
+      const storedUser = JSON.parse(localStorage.getItem('user'));
+
+      if (storedUser && storedUser.email === email && storedUser.password === password) {
+        alert("Login Berhasil!");
+        // Redirect ke halaman utama
+        window.location.href = "main.html"; // Halaman utama setelah login
+      } else {
+        alert("Email atau Password salah!");
+      }
     });
 
     // Handle register form submission
@@ -109,8 +117,17 @@
       const name = document.getElementById('registerName').value;
       const email = document.getElementById('registerEmail').value;
       const password = document.getElementById('registerPassword').value;
-      alert(`Registrasi Berhasil! Nama: ${name}, Email: ${email}, Password: ${password}`);
-      // Perform registration logic here (e.g., API request, etc.)
+
+      // Simpan data pengguna di localStorage
+      const userData = { name, email, password };
+      localStorage.setItem('user', JSON.stringify(userData));
+      
+      alert(`Registrasi Berhasil! Nama: ${name}, Email: ${email}`);
+
+      // Setelah registrasi, langsung login
+      document.getElementById('loginEmail').value = email;
+      document.getElementById('loginPassword').value = password;
+      loginBtn.click();  // Klik tombol login untuk login otomatis
     });
   </script>
 
