@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FastProxyID - Premium Proxy Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up {
+      animation: fadeUp 0.8s ease forwards;
+    }
+  </style>
+</head>
+<body class="bg-[#0e0e10] text-white font-sans tracking-wide">
+
+  <!-- Header -->
+  <header class="text-center py-16 px-4">
+    <h1 class="text-4xl md:text-6xl font-extrabold fade-up">FastProxyID</h1>
+    <p class="text-gray-400 text-lg mt-4 fade-up" style="animation-delay: 0.2s;">Toko Proxy Premium • Kecepatan & Privasi Maksimal</p>
+  </header>
+
+  <!-- Produk Section -->
+  <section class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 py-12">
+    <!-- Produk Card -->
+    <div class="bg-gradient-to-tr from-gray-800 to-gray-700 rounded-3xl p-6 shadow-xl hover:scale-105 transition-transform duration-300 fade-up">
+      <h2 class="text-xl font-bold mb-2">Proxy IPv4 Premium</h2>
+      <p class="text-gray-300">Lokasi: Indonesia, USA</p>
+      <p class="text-green-400 font-bold mt-4 text-lg">Rp 15.000 / bulan</p>
+      <a href="#order" class="block mt-6 bg-blue-600 hover:bg-blue-700 text-center py-2 rounded-xl font-semibold">Order Sekarang</a>
+    </div>
+
+    <div class="bg-gradient-to-tr from-gray-800 to-gray-700 rounded-3xl p-6 shadow-xl hover:scale-105 transition-transform duration-300 fade-up" style="animation-delay: 0.1s;">
+      <h2 class="text-xl font-bold mb-2">Proxy IPv6 Unlimited</h2>
+      <p class="text-gray-300">Lokasi: US, CA, EU</p>
+      <p class="text-green-400 font-bold mt-4 text-lg">Rp 10.000 / bulan</p>
+      <a href="#order" class="block mt-6 bg-blue-600 hover:bg-blue-700 text-center py-2 rounded-xl font-semibold">Order Sekarang</a>
+    </div>
+
+    <div class="bg-gradient-to-tr from-gray-800 to-gray-700 rounded-3xl p-6 shadow-xl hover:scale-105 transition-transform duration-300 fade-up" style="animation-delay: 0.2s;">
+      <h2 class="text-xl font-bold mb-2">Datacenter Shared Proxy</h2>
+      <p class="text-gray-300">Support semua tools</p>
+      <p class="text-green-400 font-bold mt-4 text-lg">Rp 5.000 / bulan</p>
+      <a href="#order" class="block mt-6 bg-blue-600 hover:bg-blue-700 text-center py-2 rounded-xl font-semibold">Order Sekarang</a>
+    </div>
+  </section>
+
+  <!-- Form Order -->
+  <section id="order" class="bg-white text-gray-900 py-16 px-6 rounded-t-3xl">
+    <div class="max-w-xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-8">Form Pemesanan</h2>
+      <form class="grid gap-4">
+        <input type="text" placeholder="Nama Lengkap" class="p-3 border rounded-lg" required />
+        <input type="email" placeholder="Email Aktif" class="p-3 border rounded-lg" required />
+        <select class="p-3 border rounded-lg" required>
+          <option value="">Pilih Produk Proxy</option>
+          <option>IPv4 Premium - Rp15.000</option>
+          <option>IPv6 Unlimited - Rp10.000</option>
+          <option>Datacenter Shared - Rp5.000</option>
+        </select>
+        <textarea placeholder="Catatan tambahan (opsional)" class="p-3 border rounded-lg"></textarea>
+        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold">
+          Kirim Pesanan
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center text-sm text-gray-400 py-8">
+    &copy; 2025 FastProxyID. All rights reserved.
+  </footer>
+
+</body>
+</html>
